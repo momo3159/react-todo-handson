@@ -1,19 +1,17 @@
-import React, {FC, useState} from "react";
+import React, {FC, SyntheticEvent, useState} from "react";
 import TextBox from "../atoms/TextBox/TextBox";
 import Button from "../atoms/Button/Button";
 
-const TodoForm: FC = () => {
-    const [taskName, setTaskName] = useState("");
-    const click = (e) => {
-        setTaskName("")
-        // storeのTODOリストに追加する処理を行う
-        e.preventDefault();
-    }
-    
+type Props = {
+    onClick?: (e) => void;
+    onChange?: (v: string) => void;
+}
+
+const TodoForm: FC<Props> = (props) => {
     return (
         <form>
-            <TextBox value={taskName} onChange={setTaskName} />
-            <Button value="登録" onClick={e => click(e)}/>
+            <TextBox onChange={props.onChange} />
+            <Button value="登録" onClick={props.onClick}/>
         </form>
     )
 }
